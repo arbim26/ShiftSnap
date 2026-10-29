@@ -1,0 +1,26 @@
+<resources>
+    <!-- MD3 Baseline – Blue-Steel industrial palette -->
+    <color name="md_theme_primary">#1A6B9A</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#C7E5FF</color>
+    <color name="md_theme_onPrimaryContainer">#001F33</color>
+    <color name="md_theme_secondary">#4E6373</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#D1E8FA</color>
+    <color name="md_theme_onSecondaryContainer">#0B1E2B</color>
+    <color name="md_theme_surface">#F6FAFE</color>
+    <color name="md_theme_onSurface">#171C1F</color>
+    <color name="md_theme_surfaceVariant">#DCE4EC</color>
+    <color name="md_theme_onSurfaceVariant">#40484F</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_outline">#70787F</color>
+    <!--  Status Normal (hijau)  -->
+    <color name="status_normal_bg">#C8E6C9</color>
+    <color name="status_normal_text">#1B5E20</color>
+    <!--  Status Maintenance / Peringatan (kuning-oranye)  -->
+    <color name="status_warning_bg">#FFF9C4</color>
+    <color name="status_warning_text">#F57F17</color>
+    <!--  Status Breakdown / Error (merah)  -->
+    <color name="status_error_bg">#FFCDD2</color>
+    <color name="status_error_text">#B71C1C</color>
+</resources>

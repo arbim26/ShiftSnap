@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="screen_height_min">640dp</dimen>
+</resources>
