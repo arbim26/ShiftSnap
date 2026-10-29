@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ShiftSnap</string>
+    <string name="app_tagline">Dokumentasi Visual Mesin Antar-Shift</string>
+    <string name="hint_operator_id">ID Operator</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Masuk</string>
+    <string name="error_fill_all">Isi semua field terlebih dahulu</string>
+    <string name="error_invalid_credentials">ID Operator atau Password salah</string>
+    <string name="greeting_prefix">Selamat datang,</string>
+    <string name="card_new_report">Buat Laporan Shift Baru</string>
+    <string name="card_recap">Lihat Rekapitulasi Mesin</string>
+    <string name="menu_settings">Settings / Mode Gelap</string>
+    <string name="menu_logout">Logout</string>
+    <string name="shift_active">Shift Aktif</string>
+    <string name="last_report">Laporan Terakhir</string>
+</resources>
