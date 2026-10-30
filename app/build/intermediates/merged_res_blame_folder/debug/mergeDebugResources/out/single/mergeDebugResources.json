@@ -1,0 +1,82 @@
+[
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_report_detail.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_report_detail.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/menu_main_menu.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/menu/main_menu.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_item_report_history.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/item_report_history.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_logout.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_logout.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/xml_file_provider_paths.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/xml/file_provider_paths.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_recap_list.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_recap_list.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_camera_machine.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_camera_machine.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_detail_report.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_detail_report.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_add_report.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_add_report.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_bar_chart.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_bar_chart.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_person.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_item_detail_row.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/item_detail_row.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_login.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_main.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_lock.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/menu_menu_report_item.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/menu/menu_report_item.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_dark_mode.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_dark_mode.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_chevron_right.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_chevron_right.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_form_report.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/layout/activity_form_report.xml"
+    },
+    {
+        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_overflow_menu.xml.flat",
+        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_overflow_menu.xml"
+    }
+]

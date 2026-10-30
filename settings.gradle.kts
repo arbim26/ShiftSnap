@@ -20,3 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "ShiftSnap"
+include(":app")

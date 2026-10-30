@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_onPrimaryContainer">#001F33</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_onSecondaryContainer">#0B1E2B</color>
+    <color name="md_theme_onSurface">#171C1F</color>
+    <color name="md_theme_onSurfaceVariant">#40484F</color>
+    <color name="md_theme_outline">#70787F</color>
+    <color name="md_theme_primary">#1A6B9A</color>
+    <color name="md_theme_primaryContainer">#C7E5FF</color>
+    <color name="md_theme_secondary">#4E6373</color>
+    <color name="md_theme_secondaryContainer">#D1E8FA</color>
+    <color name="md_theme_surface">#F6FAFE</color>
+    <color name="md_theme_surfaceVariant">#DCE4EC</color>
+    <color name="status_error_bg">#FFCDD2</color>
+    <color name="status_error_text">#B71C1C</color>
+    <color name="status_normal_bg">#C8E6C9</color>
+    <color name="status_normal_text">#1B5E20</color>
+    <color name="status_warning_bg">#FFF9C4</color>
+    <color name="status_warning_text">#F57F17</color>
+    <dimen name="screen_height_min">640dp</dimen>
+    <string name="app_name">ShiftSnap</string>
+    <string name="app_tagline">Dokumentasi Visual Mesin Antar-Shift</string>
+    <string name="btn_login">Masuk</string>
+    <string name="card_new_report">Buat Laporan Shift Baru</string>
+    <string name="card_recap">Lihat Rekapitulasi Mesin</string>
+    <string name="error_fill_all">Isi semua field terlebih dahulu</string>
+    <string name="error_invalid_credentials">ID Operator atau Password salah</string>
+    <string name="greeting_prefix">Selamat datang,</string>
+    <string name="hint_operator_id">ID Operator</string>
+    <string name="hint_password">Password</string>
+    <string name="last_report">Laporan Terakhir</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_settings">Settings / Mode Gelap</string>
+    <string name="shift_active">Shift Aktif</string>
+    <style name="Theme.ShiftSnap" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorError">@color/md_theme_error</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="Theme.ShiftSnap.Login" parent="Theme.ShiftSnap">
+        <item name="android:windowBackground">@color/md_theme_surface</item>
+    </style>
+</resources>

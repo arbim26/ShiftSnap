@@ -1,0 +1,4 @@
+com.example.shiftsnap.test-androidTest-0 C:\Users\rafli\AndroidStudioProjects\ShiftSnap\build\generated\res\resValues\androidTest\debug
+com.example.shiftsnap.test-mergeDebugAndroidTestResources-1 C:\Users\rafli\AndroidStudioProjects\ShiftSnap\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.shiftsnap.test-mergeDebugAndroidTestResources-2 C:\Users\rafli\AndroidStudioProjects\ShiftSnap\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.shiftsnap.test-debugAndroidTest-3 C:\Users\rafli\AndroidStudioProjects\ShiftSnap\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
