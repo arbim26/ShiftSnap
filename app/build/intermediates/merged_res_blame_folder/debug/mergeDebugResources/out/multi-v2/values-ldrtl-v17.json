@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-30:/values-ldrtl-v17/values-ldrtl-v17.xml",
+            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-35:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\rafli\\.gradle\\caches\\9.3.0\\transforms\\3394fae758fb521e3599b656eb5995e1\\workspace\\transformed\\material-1.12.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "source": "C:\\Users\\nazwa\\.gradle\\caches\\9.3.0\\transforms\\3394fae758fb521e3599b656eb5995e1\\workspace\\transformed\\material-1.12.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

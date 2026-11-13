@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- AndroidManifest.xml – update Tahap 2: tambah FormReportActivity & ReportDetailActivity -->
+<?xml version="1.0" encoding="utf-8"?><!-- AndroidManifest.xml – update Tahap 2: tambah FormReportActivity & ReportDetailActivity -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.shiftsnap">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,10 +22,10 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:exported="false"
@@ -34,8 +35,8 @@
         <activity
             android:name=".FormReportActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- TAHAP 2: Halaman rekapitulasi / pratinjau laporan -->
         <activity
@@ -43,20 +44,19 @@
             android:exported="false"
             android:parentActivityName=".FormReportActivity" />
 
-
         <!-- TAHAP 3: Rekapitulasi riwayat laporan -->
         <activity
             android:name=".RecapListActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
-            android:label="Riwayat Laporan" />
+            android:label="Riwayat Laporan"
+            android:parentActivityName=".MainActivity" />
 
         <!-- TAHAP 3: Detail satu laporan dari riwayat -->
         <activity
             android:name=".DetailReportActivity"
             android:exported="false"
-            android:parentActivityName=".RecapListActivity"
-            android:label="Detail Laporan" />
+            android:label="Detail Laporan"
+            android:parentActivityName=".RecapListActivity" />
 
         <!-- FileProvider untuk berbagi URI foto kamera ke Intent -->
         <provider
@@ -69,5 +69,12 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
+        <!-- Absensi pegawai (masuk / pulang) -->
+        <activity
+            android:name=".AttendanceActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
+
 </manifest>

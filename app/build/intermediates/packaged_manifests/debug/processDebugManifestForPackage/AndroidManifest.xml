@@ -7,9 +7,11 @@
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="35" />
+        android:targetSdkVersion="34" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <permission
         android:name="com.example.shiftsnap.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -83,6 +85,22 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
+
+        <!-- Absensi pegawai (masuk / pulang) -->
+        <activity
+            android:name="com.example.shiftsnap.AttendanceActivity"
+            android:exported="false"
+            android:parentActivityName="com.example.shiftsnap.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.example.shiftsnap.androidx-startup"

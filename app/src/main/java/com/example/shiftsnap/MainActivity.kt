@@ -8,7 +8,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.shiftsnap.databinding.ActivityMainBinding
+import com.example.shiftsnap.model.AttendanceRecord
+import com.example.shiftsnap.model.AttendanceRepository
 import com.google.android.material.snackbar.Snackbar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +30,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupUser()
         setupClickListeners()
+        updateAttendanceStatus()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateAttendanceStatus()
     }
 
     // Inflate menu via onCreateOptionsMenu (cara yang benar)
@@ -75,10 +86,40 @@ class MainActivity : AppCompatActivity() {
         binding.tvOperatorName.text = if (operatorId.isNotEmpty()) operatorId else "Operator"
     }
 
+    private fun updateAttendanceStatus() {
+        val repo = AttendanceRepository(this)
+        val operatorId = session.getOperatorId()
+        val masuk = repo.todayMasuk(operatorId)
+        val pulang = repo.todayPulang(operatorId)
+        val timeFmt = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        val masukText = if (masuk != null) "sudah (${timeFmt.format(Date(masuk.timestamp))})" else "belum"
+        val pulangText = if (pulang != null) "sudah (${timeFmt.format(Date(pulang.timestamp))})" else "belum"
+
+        binding.tvStatusAbsen.text = "Masuk: $masukText  •  Pulang: $pulangText"
+    }
+
     private fun setupClickListeners() {
+        binding.cardAttendance.setOnClickListener { navigateToAttendance() }
+        binding.btnMainAbsenMasuk.setOnClickListener { navigateToAttendance(AttendanceRecord.MASUK) }
+        binding.btnMainAbsenPulang.setOnClickListener { navigateToAttendance(AttendanceRecord.PULANG) }
         binding.cardNewReport.setOnClickListener { navigateToNewReport() }
         binding.cardRecap.setOnClickListener { navigateToRecap() }
         binding.fabNewReport.setOnClickListener { navigateToNewReport() }
+    }
+
+    private fun navigateToAttendance(jenis: String? = null) {
+        val operatorId = session.getOperatorId()
+        val intent = Intent(this, AttendanceActivity::class.java).apply {
+            putExtra(
+                AttendanceActivity.EXTRA_OPERATOR_NAME,
+                if (operatorId.isNotEmpty()) operatorId else "Operator"
+            )
+            if (jenis != null) {
+                putExtra(AttendanceActivity.EXTRA_JENIS, jenis)
+            }
+        }
+        startActivity(intent)
     }
 
     private fun navigateToNewReport() {
@@ -88,4 +129,5 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToRecap() {
         startActivity(Intent(this, RecapListActivity::class.java))
     }
+
 }

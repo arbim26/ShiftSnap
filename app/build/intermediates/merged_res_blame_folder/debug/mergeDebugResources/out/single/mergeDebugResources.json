@@ -1,82 +1,98 @@
 [
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_report_detail.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_report_detail.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\menu_main_menu.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\menu\\main_menu.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/menu_main_menu.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/menu/main_menu.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_attendance.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_attendance.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_item_report_history.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/item_report_history.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_camera_machine.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_camera_machine.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_logout.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_logout.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_detail_report.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_detail_report.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/xml_file_provider_paths.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/xml/file_provider_paths.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_location.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_location.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_recap_list.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_recap_list.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_recap_list.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_recap_list.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_camera_machine.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_camera_machine.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\menu_menu_report_item.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\menu\\menu_report_item.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_detail_report.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_detail_report.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_login.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_add_report.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_add_report.xml"
+        "merged": "com.example.shiftsnap.app-debug-37:/drawable_ic_arrow_back.xml.flat",
+        "source": "com.example.shiftsnap.app-main-39:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_bar_chart.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_bar_chart.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_add_report.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_add_report.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_person.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_person.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_chevron_right.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_chevron_right.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_item_detail_row.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/item_detail_row.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_form_report.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_form_report.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_login.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_login.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_person.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_person.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_main.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_main.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_lock.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_lock.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_item_report_history.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\item_report_history.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/menu_menu_report_item.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/menu/menu_report_item.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_logout.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_logout.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_dark_mode.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_dark_mode.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_activity_report_detail.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\activity_report_detail.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_chevron_right.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_chevron_right.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_lock.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_lock.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/layout_activity_form_report.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/layout/activity_form_report.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_bar_chart.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_bar_chart.xml"
     },
     {
-        "merged": "com.example.shiftsnap.app-debug-32:/drawable_ic_overflow_menu.xml.flat",
-        "source": "com.example.shiftsnap.app-main-34:/drawable/ic_overflow_menu.xml"
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\xml_file_provider_paths.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\xml\\file_provider_paths.xml"
+    },
+    {
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_dark_mode.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_dark_mode.xml"
+    },
+    {
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_overflow_menu.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_overflow_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\drawable_ic_face.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\drawable\\ic_face.xml"
+    },
+    {
+        "merged": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-debug-37:\\layout_item_detail_row.xml.flat",
+        "source": "C:\\Users\\nazwa\\.gradle\\daemon\\9.3.0\\com.example.shiftsnap.app-main-39:\\layout\\item_detail_row.xml"
     }
 ]

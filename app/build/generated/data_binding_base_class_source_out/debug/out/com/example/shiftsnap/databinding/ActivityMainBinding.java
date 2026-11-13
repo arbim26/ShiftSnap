@@ -13,6 +13,7 @@ import androidx.viewbinding.ViewBindings;
 import com.example.shiftsnap.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,6 +27,15 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @NonNull
   public final AppBarLayout appBarLayout;
+
+  @NonNull
+  public final MaterialButton btnMainAbsenMasuk;
+
+  @NonNull
+  public final MaterialButton btnMainAbsenPulang;
+
+  @NonNull
+  public final MaterialCardView cardAttendance;
 
   @NonNull
   public final MaterialCardView cardGreeting;
@@ -51,14 +61,22 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final TextView tvOperatorName;
 
+  @NonNull
+  public final TextView tvStatusAbsen;
+
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull AppBarLayout appBarLayout, @NonNull MaterialCardView cardGreeting,
-      @NonNull MaterialCardView cardNewReport, @NonNull MaterialCardView cardRecap,
-      @NonNull Chip chipShift, @NonNull FloatingActionButton fabNewReport,
-      @NonNull MaterialToolbar toolbar, @NonNull TextView tvLastReport,
-      @NonNull TextView tvOperatorName) {
+      @NonNull AppBarLayout appBarLayout, @NonNull MaterialButton btnMainAbsenMasuk,
+      @NonNull MaterialButton btnMainAbsenPulang, @NonNull MaterialCardView cardAttendance,
+      @NonNull MaterialCardView cardGreeting, @NonNull MaterialCardView cardNewReport,
+      @NonNull MaterialCardView cardRecap, @NonNull Chip chipShift,
+      @NonNull FloatingActionButton fabNewReport, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView tvLastReport, @NonNull TextView tvOperatorName,
+      @NonNull TextView tvStatusAbsen) {
     this.rootView = rootView;
     this.appBarLayout = appBarLayout;
+    this.btnMainAbsenMasuk = btnMainAbsenMasuk;
+    this.btnMainAbsenPulang = btnMainAbsenPulang;
+    this.cardAttendance = cardAttendance;
     this.cardGreeting = cardGreeting;
     this.cardNewReport = cardNewReport;
     this.cardRecap = cardRecap;
@@ -67,6 +85,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.toolbar = toolbar;
     this.tvLastReport = tvLastReport;
     this.tvOperatorName = tvOperatorName;
+    this.tvStatusAbsen = tvStatusAbsen;
   }
 
   @Override
@@ -99,6 +118,24 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.appBarLayout;
       AppBarLayout appBarLayout = ViewBindings.findChildViewById(rootView, id);
       if (appBarLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.btnMainAbsenMasuk;
+      MaterialButton btnMainAbsenMasuk = ViewBindings.findChildViewById(rootView, id);
+      if (btnMainAbsenMasuk == null) {
+        break missingId;
+      }
+
+      id = R.id.btnMainAbsenPulang;
+      MaterialButton btnMainAbsenPulang = ViewBindings.findChildViewById(rootView, id);
+      if (btnMainAbsenPulang == null) {
+        break missingId;
+      }
+
+      id = R.id.cardAttendance;
+      MaterialCardView cardAttendance = ViewBindings.findChildViewById(rootView, id);
+      if (cardAttendance == null) {
         break missingId;
       }
 
@@ -150,8 +187,15 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, appBarLayout, cardGreeting,
-          cardNewReport, cardRecap, chipShift, fabNewReport, toolbar, tvLastReport, tvOperatorName);
+      id = R.id.tvStatusAbsen;
+      TextView tvStatusAbsen = ViewBindings.findChildViewById(rootView, id);
+      if (tvStatusAbsen == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((CoordinatorLayout) rootView, appBarLayout, btnMainAbsenMasuk,
+          btnMainAbsenPulang, cardAttendance, cardGreeting, cardNewReport, cardRecap, chipShift,
+          fabNewReport, toolbar, tvLastReport, tvOperatorName, tvStatusAbsen);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
