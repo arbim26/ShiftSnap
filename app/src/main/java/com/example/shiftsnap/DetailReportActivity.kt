@@ -3,6 +3,7 @@ package com.example.shiftsnap
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,18 +15,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * Tahap 3 – ShiftSnap
- * DetailReportActivity.kt
- *
- * Menampilkan kartu rangkuman detail satu laporan dari riwayat.
- * Menerima [EXTRA_REPORT_ID] → mengambil data dari ReportRepository.
- *
- * Fitur:
- *  - Tampilan lengkap seluruh field laporan
- *  - Tombol "Bagikan ke Supervisor" via Implicit Intent (Intent.ACTION_SEND)
- *  - Tombol "Edit Laporan"
- */
 class DetailReportActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailReportBinding
@@ -124,17 +113,17 @@ class DetailReportActivity : AppCompatActivity() {
         binding.chipDetailStatus.setTextColor(ContextCompat.getColor(this, txtRes))
 
         // Checklist
-        binding.tvDetailPelumas.text  = checkIcon(report.cekPelumas)  + " Pelumas / Oli"
-        binding.tvDetailSuhu.text     = checkIcon(report.cekSuhu)     + " Suhu Mesin"
-        binding.tvDetailListrik.text  = checkIcon(report.cekListrik)  + " Modul Kelistrikan"
-        binding.tvDetailBersih.text   = checkIcon(report.cekBersih)   + " Kebersihan Area"
+        setCheckRow(binding.tvDetailPelumas, report.cekPelumas, "Cek Pelumas / Oli")
+        setCheckRow(binding.tvDetailSuhu,    report.cekSuhu,    "Cek Suhu Mesin")
+        setCheckRow(binding.tvDetailListrik, report.cekListrik, "Cek Modul Kelistrikan")
+        setCheckRow(binding.tvDetailBersih,  report.cekBersih,  "Kebersihan Area Mesin")
 
         // Foto
         val shown = report.fotoTerlampir && PhotoLoader.load(binding.imgDetailFoto, report.fotoUri)
         binding.imgDetailFoto.visibility = if (shown) View.VISIBLE else View.GONE
         binding.tvDetailFoto.text = when {
-            shown                  -> "📷 Foto terlampir"
-            report.fotoTerlampir   -> "📷 Foto terlampir (file tidak dapat dimuat)"
+            shown                  -> "Foto terlampir"
+            report.fotoTerlampir   -> "Foto terlampir (file tidak dapat dimuat)"
             else                   -> "— Tidak ada foto —"
         }
 
@@ -142,7 +131,14 @@ class DetailReportActivity : AppCompatActivity() {
         binding.tvDetailCatatan.text = report.catatan.ifBlank { "— Tidak ada catatan kendala —" }
     }
 
-    private fun checkIcon(checked: Boolean) = if (checked) "✅" else "⬜"
+    /** Baris daftar periksa: ikon centang/silang (drawable) + label, tanpa emoji. */
+    private fun setCheckRow(tv: TextView, checked: Boolean, label: String) {
+        tv.text = label
+        tv.compoundDrawablePadding = (8 * resources.displayMetrics.density).toInt()
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            if (checked) R.drawable.ic_check else R.drawable.ic_close, 0, 0, 0
+        )
+    }
 
     // ── Tombol Aksi ───────────────────────────────────────────────────────────
 
@@ -174,24 +170,24 @@ class DetailReportActivity : AppCompatActivity() {
     private fun buildShareText(report: ReportHistory): String {
         val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale("id", "ID"))
         val checklist = buildString {
-            append(if (report.cekPelumas) "  ✅ Pelumas/Oli\n"   else "  ❌ Pelumas/Oli\n")
-            append(if (report.cekSuhu)    "  ✅ Suhu Mesin\n"    else "  ❌ Suhu Mesin\n")
-            append(if (report.cekListrik) "  ✅ Kelistrikan\n"   else "  ❌ Kelistrikan\n")
-            append(if (report.cekBersih)  "  ✅ Kebersihan\n"    else "  ❌ Kebersihan\n")
+            append("  - Pelumas / Oli    : ${if (report.cekPelumas) "Sudah" else "Belum"}\n")
+            append("  - Suhu Mesin       : ${if (report.cekSuhu) "Sudah" else "Belum"}\n")
+            append("  - Modul Kelistrikan: ${if (report.cekListrik) "Sudah" else "Belum"}\n")
+            append("  - Kebersihan Area  : ${if (report.cekBersih) "Sudah" else "Belum"}\n")
         }
         return """
-🏭 *LAPORAN KONDISI MESIN – ShiftSnap*
+*LAPORAN KONDISI MESIN – ShiftSnap*
 ━━━━━━━━━━━━━━━━━━━━
-📌 Mesin     : ${report.namaMesin}
-🕐 Shift     : ${report.shift}
-👷 Operator  : ${report.operatorId}
-📅 Waktu     : ${sdf.format(Date(report.timestamp))} WIB
-📊 Status    : ${report.statusMesin}
+Mesin     : ${report.namaMesin}
+Shift     : ${report.shift}
+Operator  : ${report.operatorId}
+Waktu     : ${sdf.format(Date(report.timestamp))} WIB
+Status    : ${report.statusMesin}
 
-📋 *Daftar Periksa:*
+*Daftar Periksa:*
 $checklist
-📷 Foto      : ${if (report.fotoTerlampir) "Terlampir" else "Tidak ada"}
-📝 Catatan   : ${report.catatan.ifBlank { "Tidak ada catatan" }}
+Foto      : ${if (report.fotoTerlampir) "Terlampir" else "Tidak ada"}
+Catatan   : ${report.catatan.ifBlank { "Tidak ada catatan" }}
 ━━━━━━━━━━━━━━━━━━━━
 Dikirim via ShiftSnap App
         """.trimIndent()

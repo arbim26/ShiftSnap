@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Teks ── -->
+    <style name="Widget.ShiftSnap.TextView.SectionTitle" parent="">
+        <item name="android:textAppearance">?attr/textAppearanceTitleSmall</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <!-- ── Kartu ── -->
+    <style name="Widget.ShiftSnap.Card.Outlined" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">@dimen/corner_card</item>
+    </style>
+
+    <style name="Widget.ShiftSnap.Card.Action" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/corner_card</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.ShiftSnap.Card.IconTile" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/corner_tile</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+
+</resources>

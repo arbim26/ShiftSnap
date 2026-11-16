@@ -69,7 +69,6 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
-        <!-- Absensi pegawai (masuk / pulang) -->
         <activity
             android:name=".AttendanceActivity"
             android:exported="false"

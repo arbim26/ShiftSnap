@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <bool name="light_status_bar">true</bool>
+    <color name="header_end">#1B8FD0</color>
+    <color name="header_start">#0B4F7C</color>
     <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_onPrimaryContainer">#001F33</color>
+    <color name="md_theme_onPrimaryContainer">#001D32</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_onSecondaryContainer">#0B1E2B</color>
-    <color name="md_theme_onSurface">#171C1F</color>
-    <color name="md_theme_onSurfaceVariant">#40484F</color>
-    <color name="md_theme_outline">#70787F</color>
-    <color name="md_theme_primary">#1A6B9A</color>
-    <color name="md_theme_primaryContainer">#C7E5FF</color>
-    <color name="md_theme_secondary">#4E6373</color>
-    <color name="md_theme_secondaryContainer">#D1E8FA</color>
-    <color name="md_theme_surface">#F6FAFE</color>
-    <color name="md_theme_surfaceVariant">#DCE4EC</color>
-    <color name="status_error_bg">#FFCDD2</color>
+    <color name="md_theme_onSecondaryContainer">#0D1D2A</color>
+    <color name="md_theme_onSurface">#181C20</color>
+    <color name="md_theme_onSurfaceVariant">#41484D</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_onTertiaryContainer">#2C1600</color>
+    <color name="md_theme_outline">#71787E</color>
+    <color name="md_theme_outlineVariant">#C1C7CE</color>
+    <color name="md_theme_primary">#0A6AA6</color>
+    <color name="md_theme_primaryContainer">#CFE6FA</color>
+    <color name="md_theme_secondary">#51606F</color>
+    <color name="md_theme_secondaryContainer">#D4E4F6</color>
+    <color name="md_theme_surface">#F6F9FC</color>
+    <color name="md_theme_surfaceContainer">#EAEEF3</color>
+    <color name="md_theme_surfaceContainerHigh">#E4E9EE</color>
+    <color name="md_theme_surfaceContainerLow">#F0F4F8</color>
+    <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_surfaceVariant">#DDE3EA</color>
+    <color name="md_theme_tertiary">#8A5100</color>
+    <color name="md_theme_tertiaryContainer">#FFDCBD</color>
+    <color name="on_header">#FFFFFF</color>
+    <color name="on_header_variant">#D6EAF8</color>
+    <color name="status_error_bg">#FFD9DC</color>
     <color name="status_error_text">#B71C1C</color>
-    <color name="status_normal_bg">#C8E6C9</color>
+    <color name="status_normal_bg">#D3EED5</color>
     <color name="status_normal_text">#1B5E20</color>
-    <color name="status_warning_bg">#FFF9C4</color>
-    <color name="status_warning_text">#F57F17</color>
+    <color name="status_warning_bg">#FFF0C2</color>
+    <color name="status_warning_text">#8F5200</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_35">#59FFFFFF</color>
+    <dimen name="corner_card">16dp</dimen>
+    <dimen name="corner_tile">12dp</dimen>
     <dimen name="screen_height_min">640dp</dimen>
     <string name="app_name">ShiftSnap</string>
     <string name="app_tagline">Dokumentasi Visual Mesin Antar-Shift</string>
@@ -32,24 +53,148 @@
     <string name="hint_operator_id">ID Operator</string>
     <string name="hint_password">Password</string>
     <string name="last_report">Laporan Terakhir</string>
+    <string name="login_demo_hint">Demo: ID = OPR001 · Password = shift123</string>
+    <string name="login_subtitle">Gunakan ID operator Anda untuk memulai laporan shift.</string>
+    <string name="login_title">Masuk ke Akun</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_settings">Settings / Mode Gelap</string>
+    <string name="section_quick_actions">Aksi Cepat</string>
     <string name="shift_active">Shift Aktif</string>
+    <string name="shift_none">Belum ada shift</string>
+    <string name="title_attendance">Absensi Operator</string>
+    <string name="title_detail_report">Detail Laporan</string>
+    <string name="title_form_report">Form Laporan Shift</string>
+    <string name="title_recap">Rekapitulasi Laporan</string>
+    <style name="ShapeAppearance.ShiftSnap.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+    <style name="ShapeAppearance.ShiftSnap.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+    <style name="ShapeAppearance.ShiftSnap.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    <style name="TextAppearance.ShiftSnap.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+    <style name="TextAppearance.ShiftSnap.Overline" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+    <style name="TextAppearance.ShiftSnap.ToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
     <style name="Theme.ShiftSnap" parent="Theme.Material3.DayNight.NoActionBar">
+        
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
         <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer</item>
         <item name="colorSecondary">@color/md_theme_secondary</item>
         <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer</item>
+        <item name="android:colorBackground">@color/md_theme_surface</item>
         <item name="colorSurface">@color/md_theme_surface</item>
         <item name="colorOnSurface">@color/md_theme_onSurface</item>
         <item name="colorSurfaceVariant">@color/md_theme_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_onSurfaceVariant</item>
+        <item name="colorSurfaceContainerLowest">@color/md_theme_surfaceContainerLowest</item>
+        <item name="colorSurfaceContainerLow">@color/md_theme_surfaceContainerLow</item>
+        <item name="colorSurfaceContainer">@color/md_theme_surfaceContainer</item>
+        <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
+        <item name="colorOutline">@color/md_theme_outline</item>
+        <item name="colorOutlineVariant">@color/md_theme_outlineVariant</item>
         <item name="colorError">@color/md_theme_error</item>
+        <item name="colorOnError">@color/md_theme_onError</item>
+        <item name="colorErrorContainer">@color/md_theme_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/md_theme_onErrorContainer</item>
+
+        
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.ShiftSnap.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.ShiftSnap.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.ShiftSnap.Large</item>
+
+        
+        <item name="materialCardViewStyle">@style/Widget.ShiftSnap.Card</item>
+        <item name="materialButtonStyle">@style/Widget.ShiftSnap.Button</item>
+        <item name="materialButtonOutlinedStyle">@style/Widget.ShiftSnap.Button.Outlined</item>
+        <item name="textInputStyle">@style/Widget.ShiftSnap.TextInputLayout</item>
+        <item name="toolbarStyle">@style/Widget.ShiftSnap.Toolbar</item>
+
+        
         <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
     </style>
     <style name="Theme.ShiftSnap.Login" parent="Theme.ShiftSnap">
         <item name="android:windowBackground">@color/md_theme_surface</item>
+        <item name="android:statusBarColor">@color/header_start</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+    <style name="Widget.ShiftSnap.Button" parent="Widget.Material3.Button">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.ShiftSnap.Button</item>
+    </style>
+    <style name="Widget.ShiftSnap.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">14dp</item>
+        <item name="android:minHeight">52dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="strokeColor">?attr/colorOutline</item>
+        <item name="android:textAppearance">@style/TextAppearance.ShiftSnap.Button</item>
+    </style>
+    <style name="Widget.ShiftSnap.Card" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainerLowest</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+    <style name="Widget.ShiftSnap.Card.Action" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardCornerRadius">@dimen/corner_card</item>
+        <item name="cardElevation">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+    <style name="Widget.ShiftSnap.Card.IconTile" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">@dimen/corner_tile</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+    <style name="Widget.ShiftSnap.Card.Outlined" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">@dimen/corner_card</item>
+    </style>
+    <style name="Widget.ShiftSnap.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+    </style>
+    <style name="Widget.ShiftSnap.TextInputLayout.Dropdown" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+    </style>
+    <style name="Widget.ShiftSnap.TextView.SectionTitle" parent="">
+        <item name="android:textAppearance">?attr/textAppearanceTitleSmall</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+    <style name="Widget.ShiftSnap.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.ShiftSnap.ToolbarTitle</item>
     </style>
 </resources>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-35:/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-36:/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nazwa\\.gradle\\caches\\9.3.0\\transforms\\7517c692869451083a49834af6007659\\workspace\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",

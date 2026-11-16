@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-35:/values-ka/values-ka.xml",
+            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-36:/values-ka/values-ka.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nazwa\\.gradle\\caches\\9.3.0\\transforms\\b50e9fbd3d0ff7173b94a9f79a0d4de7\\workspace\\transformed\\core-1.13.1\\res\\values-ka\\values-ka.xml",

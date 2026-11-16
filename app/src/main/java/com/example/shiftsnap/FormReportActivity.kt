@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.shiftsnap.databinding.ActivityFormReportBinding
+import com.example.shiftsnap.model.AttendanceRecord
+import com.example.shiftsnap.model.AttendanceRepository
 import com.example.shiftsnap.model.ReportHistory
 import com.example.shiftsnap.model.ReportRepository
 import java.io.File
@@ -22,13 +24,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-/**
- * Tahap 3 – ShiftSnap
- * FormReportActivity.kt
- *
- * Form input kondisi mesin dengan fitur kamera nyata menggunakan
- * ActivityResultContracts.TakePicture + FileProvider.
- */
+
 class FormReportActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFormReportBinding
@@ -53,11 +49,7 @@ class FormReportActivity : AppCompatActivity() {
         const val EXTRA_FOTO_URI     = "extra_foto_uri"
         const val EXTRA_OPERATOR_ID  = "extra_operator_id"
 
-        private val SHIFT_OPTIONS = listOf(
-            "Shift 1 – Pagi  (06.00–14.00)",
-            "Shift 2 – Siang (14.00–22.00)",
-            "Shift 3 – Malam (22.00–06.00)"
-        )
+        private val SHIFT_OPTIONS = AttendanceRecord.SHIFT_OPTIONS
     }
 
     // ── ActivityResult: ambil foto dari kamera ────────────────────────────────
@@ -110,7 +102,7 @@ class FormReportActivity : AppCompatActivity() {
             report.statusMesin.contains("Normal", ignoreCase = true) -> binding.rbNormal.isChecked = true
             report.statusMesin.contains("Maintenance", ignoreCase = true) -> binding.rbMaintenance.isChecked = true
             report.statusMesin.contains("Rusak", ignoreCase = true) ||
-                report.statusMesin.contains("Breakdown", ignoreCase = true) -> binding.rbBreakdown.isChecked = true
+                    report.statusMesin.contains("Breakdown", ignoreCase = true) -> binding.rbBreakdown.isChecked = true
         }
 
         binding.cbPelumas.isChecked    = report.cekPelumas
@@ -182,6 +174,19 @@ class FormReportActivity : AppCompatActivity() {
         )
         binding.spinnerShift.setAdapter(adapter)
         binding.spinnerShift.setOnClickListener { binding.spinnerShift.showDropDown() }
+
+        // Laporan baru: pakai shift dari absen masuk hari ini (terkunci).
+        // Edit laporan lama: dibiarkan, checkEditMode() yang mengisi nilainya.
+        val isEdit = intent.getStringExtra(EXTRA_EDIT_REPORT_ID) != null
+        if (!isEdit) {
+            val shiftAbsen = AttendanceRepository(this).todayShift(session.getOperatorId())
+            if (!shiftAbsen.isNullOrBlank()) {
+                binding.spinnerShift.setText(shiftAbsen, false)
+                binding.tilShift.isEnabled = false
+                binding.tilShift.helperText = "Sesuai absen masuk hari ini"
+            }
+            // Belum absen masuk → dropdown tetap bisa dipilih manual
+        }
     }
 
     // ── Tombol Foto ───────────────────────────────────────────────────────────
@@ -286,9 +291,9 @@ class FormReportActivity : AppCompatActivity() {
 
     private fun navigateToDetail() {
         val statusLabel = when (binding.rgStatusMesin.checkedRadioButtonId) {
-            R.id.rbNormal      -> "✅  Normal / Siap Jalan"
-            R.id.rbMaintenance -> "⚠️  Perlu Maintenance"
-            R.id.rbBreakdown   -> "🔴  Rusak / Breakdown"
+            R.id.rbNormal      -> "Normal / Siap Jalan"
+            R.id.rbMaintenance -> "Perlu Maintenance"
+            R.id.rbBreakdown   -> "Rusak / Breakdown"
             else               -> "-"
         }
 
