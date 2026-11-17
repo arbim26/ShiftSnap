@@ -10,13 +10,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-/**
- * Tahap 2 – ShiftSnap
- * ReportDetailActivity.kt
- *
- * Halaman rekapitulasi / pratinjau laporan shift.
- * Menerima seluruh data dari FormReportActivity via Explicit Intent Bundle.
- */
 class ReportDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReportDetailBinding
@@ -57,18 +50,21 @@ class ReportDetailActivity : AppCompatActivity() {
 
         // Daftar Periksa – tambahkan Chip untuk setiap item yang dicentang
         val checklistItems = mapOf(
-            FormReportActivity.EXTRA_CEK_PELUMAS  to "Pelumas / Oli",
-            FormReportActivity.EXTRA_CEK_SUHU     to "Suhu Mesin",
-            FormReportActivity.EXTRA_CEK_LISTRIK  to "Modul Kelistrikan",
-            FormReportActivity.EXTRA_CEK_BERSIH   to "Kebersihan Area"
+            FormReportActivity.EXTRA_CEK_PELUMAS  to "Cek Pelumas / Oli",
+            FormReportActivity.EXTRA_CEK_SUHU     to "Cek Suhu Mesin",
+            FormReportActivity.EXTRA_CEK_LISTRIK  to "Cek Modul Kelistrikan",
+            FormReportActivity.EXTRA_CEK_BERSIH   to "Kebersihan Area Mesin"
         )
 
         var anyChecked = false
         checklistItems.forEach { (key, label) ->
             val isChecked = extras.getBoolean(key, false)
             val chip = Chip(this).apply {
-                text = if (isChecked) "✅ $label" else "⬜ $label"
-                isCheckable  = false
+                text = label
+                // Item yang dicentang ditandai ikon centang bawaan Material (bukan emoji)
+                isCheckable  = true
+                this.isChecked = isChecked   // properti Chip = nilai centang dari form
+                isCheckedIconVisible = true
                 isClickable  = false
                 // Chip berwarna berbeda berdasarkan status
                 if (isChecked) {
@@ -103,8 +99,8 @@ class ReportDetailActivity : AppCompatActivity() {
         val shown = isFoto && PhotoLoader.load(binding.imgFotoDetail, fotoUri)
         binding.imgFotoDetail.visibility = if (shown) View.VISIBLE else View.GONE
         binding.tvFotoStatus.text = when {
-            shown  -> "📷 Foto terlampir"
-            isFoto -> "📷 Foto terlampir (file tidak dapat dimuat)"
+            shown  -> "Foto terlampir"
+            isFoto -> "Foto terlampir (file tidak dapat dimuat)"
             else   -> "– Tidak ada foto –"
         }
     }

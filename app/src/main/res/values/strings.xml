@@ -13,4 +13,13 @@
     <string name="menu_logout">Logout</string>
     <string name="shift_active">Shift Aktif</string>
     <string name="last_report">Laporan Terakhir</string>
+    <string name="login_title">Masuk ke Akun</string>
+    <string name="login_subtitle">Gunakan ID operator Anda untuk memulai laporan shift.</string>
+    <string name="login_demo_hint">Demo: ID = OPR001 · Password = shift123</string>
+    <string name="section_quick_actions">Aksi Cepat</string>
+    <string name="title_attendance">Absensi Operator</string>
+    <string name="title_recap">Rekapitulasi Laporan</string>
+    <string name="title_detail_report">Detail Laporan</string>
+    <string name="title_form_report">Form Laporan Shift</string>
+    <string name="shift_none">Belum ada shift</string>
 </resources>

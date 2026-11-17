@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    ShiftSnap
-    activity_attendance.xml
-    Form Absensi: Foto Lokasi + Foto Wajah (Selfie)
--->
+
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,6 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorSurface"
             app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIconTint="?attr/colorOnSurface"
             app:navigationContentDescription="Kembali"
             app:title="Absensi"
             app:titleCentered="false"
@@ -36,7 +34,7 @@
         <!-- ── SECTION: INFO ABSENSI ── -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardInfo"
-            style="@style/Widget.Material3.CardView.Outlined"
+            style="@style/Widget.ShiftSnap.Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -76,15 +74,15 @@
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <!-- Status absen hari ini -->
+                <!-- Status absen hari ini + pekerjaan (diisi dari kode) -->
                 <TextView
                     android:id="@+id/tvAbsenStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Hari ini → Masuk: belum  •  Pulang: belum"
+                    android:layout_marginTop="8dp"
                     android:textAppearance="?attr/textAppearanceBodySmall"
-                    android:textColor="?attr/colorPrimary" />
+                    android:textColor="?attr/colorPrimary"
+                    tools:text="Hari ini → Belum absen" />
 
                 <!-- Jenis absen -->
                 <com.google.android.material.button.MaterialButtonToggleGroup
@@ -115,13 +113,30 @@
                         android:textAllCaps="false" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
 
+                <!-- Pilih shift (hanya saat Absen Masuk) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilShiftAbsen"
+                    style="@style/Widget.ShiftSnap.TextInputLayout.Dropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:hint="Pilih Shift">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinnerShiftAbsen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <!-- ── SECTION: FOTO LOKASI ── -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardFotoLokasi"
-            style="@style/Widget.Material3.CardView.Outlined"
+            style="@style/Widget.ShiftSnap.Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -209,13 +224,14 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom|end"
                             android:layout_margin="8dp"
-                            android:text="📎 Foto Terlampir"
+                            android:text="Foto Terlampir"
+                            app:chipIcon="@drawable/ic_attach"
+                            app:chipIconTint="?attr/colorOnSurfaceVariant"
                             android:visibility="gone" />
 
                     </FrameLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Koordinat GPS (diisi dari kode) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -236,14 +252,14 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginStart="8dp"
-                        android:text="Koordinat belum didapat"
+                        android:text="Alamat belum terdeteksi"
                         android:textAppearance="?attr/textAppearanceBodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAmbilFotoLokasi"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    style="@style/Widget.ShiftSnap.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ambil Foto Lokasi"
@@ -253,10 +269,9 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── SECTION: FOTO WAJAH ── -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardFotoWajah"
-            style="@style/Widget.Material3.CardView.Outlined"
+            style="@style/Widget.ShiftSnap.Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -329,7 +344,6 @@
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                         </LinearLayout>
 
-                        <!-- State: foto sudah diambil -->
                         <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/imgFotoWajah"
                             android:layout_width="match_parent"
@@ -348,12 +362,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
-                    android:text="📎 Foto Terlampir"
+                    android:text="Foto Terlampir"
+                    app:chipIcon="@drawable/ic_attach"
+                    app:chipIconTint="?attr/colorOnSurfaceVariant"
                     android:visibility="gone" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAmbilFotoWajah"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    style="@style/Widget.ShiftSnap.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Ambil Foto Wajah"
@@ -363,10 +379,10 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- ── SECTION: PEKERJAAN HARI INI (hanya saat absen Pulang) ── -->
+        <!-- ── SECTION: PEKERJAAN HARI INI (tampil saat absen Pulang) ── -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardPekerjaan"
-            style="@style/Widget.Material3.CardView.Outlined"
+            style="@style/Widget.ShiftSnap.Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -384,14 +400,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
                     android:text="Pekerjaan Hari Ini"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
-                    android:textColor="?attr/colorPrimary"
-                    android:layout_marginBottom="12dp" />
+                    android:textColor="?attr/colorPrimary" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPekerjaan"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.ShiftSnap.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Apa yang dikerjakan hari ini?">
@@ -402,26 +418,26 @@
                         android:layout_height="wrap_content"
                         android:gravity="top|start"
                         android:inputType="textMultiLine|textCapSentences"
-                        android:minLines="4"
-                        android:maxLines="8" />
+                        android:minLines="3" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgFotoKerja"
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
+                    android:layout_height="180dp"
                     android:layout_marginTop="12dp"
+                    android:contentDescription="Preview foto hasil kerja"
                     android:scaleType="centerCrop"
                     android:visibility="gone"
-                    android:contentDescription="Preview foto hasil kerja" />
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.ShiftSnap.Small" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAmbilFotoKerja"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    style="@style/Widget.ShiftSnap.Button.Outlined"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Tambah Foto Hasil Kerja (opsional)"
+                    android:text="Ambil Foto Hasil Kerja (opsional)"
                     android:textAllCaps="false"
                     app:icon="@drawable/ic_camera_machine"
                     app:iconGravity="textStart" />
@@ -432,7 +448,7 @@
         <!-- ── TOMBOL KIRIM ABSEN ── -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnKirimAbsen"
-            style="@style/Widget.Material3.Button"
+            style="@style/Widget.ShiftSnap.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

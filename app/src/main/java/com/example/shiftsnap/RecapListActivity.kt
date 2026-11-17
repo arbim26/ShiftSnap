@@ -15,19 +15,7 @@ import com.example.shiftsnap.model.ReportHistory
 import com.example.shiftsnap.model.ReportRepository
 import com.google.android.material.snackbar.Snackbar
 
-/**
- * Tahap 3 – ShiftSnap
- * RecapListActivity.kt
- *
- * Menampilkan riwayat seluruh laporan yang sudah dikirim dari FormReportActivity.
- * Data disimpan di ReportRepository (in-memory). Produksi: ganti dengan Room DB.
- *
- * Fitur:
- *  - RecyclerView + card item dengan PopupMenu (Edit, Hapus, Kirim Ulang)
- *  - Empty-state view saat daftar kosong
- *  - FAB untuk buat laporan baru
- *  - Implicit Intent "Bagikan ke Supervisor" (Intent.ACTION_SEND)
- */
+
 class RecapListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRecapListBinding
@@ -184,25 +172,25 @@ class RecapListActivity : AppCompatActivity() {
     /** Susun teks rangkuman laporan untuk dibagikan. */
     private fun buildShareText(report: ReportHistory): String {
         val checklist = buildString {
-            append(if (report.cekPelumas)  "  ✅ Pelumas/Oli\n" else "  ❌ Pelumas/Oli\n")
-            append(if (report.cekSuhu)     "  ✅ Suhu Mesin\n"   else "  ❌ Suhu Mesin\n")
-            append(if (report.cekListrik)  "  ✅ Kelistrikan\n"  else "  ❌ Kelistrikan\n")
-            append(if (report.cekBersih)   "  ✅ Kebersihan\n"   else "  ❌ Kebersihan\n")
+            append("  - Pelumas / Oli    : ${if (report.cekPelumas) "Sudah" else "Belum"}\n")
+            append("  - Suhu Mesin       : ${if (report.cekSuhu) "Sudah" else "Belum"}\n")
+            append("  - Modul Kelistrikan: ${if (report.cekListrik) "Sudah" else "Belum"}\n")
+            append("  - Kebersihan Area  : ${if (report.cekBersih) "Sudah" else "Belum"}\n")
         }
         val foto = if (report.fotoTerlampir) "Ada (terlampir)" else "Tidak ada"
 
         return """
-🏭 *LAPORAN KONDISI MESIN – ShiftSnap*
+*LAPORAN KONDISI MESIN – ShiftSnap*
 ━━━━━━━━━━━━━━━━━━━━
-📌 Mesin     : ${report.namaMesin}
-🕐 Shift     : ${report.shift}
-👷 Operator  : ${report.operatorId}
-📊 Status    : ${report.statusMesin}
+Mesin     : ${report.namaMesin}
+Shift     : ${report.shift}
+Operator  : ${report.operatorId}
+Status    : ${report.statusMesin}
 
-📋 *Daftar Periksa:*
+*Daftar Periksa:*
 $checklist
-📷 Foto      : $foto
-📝 Catatan   : ${report.catatan.ifBlank { "Tidak ada catatan" }}
+Foto      : $foto
+Catatan   : ${report.catatan.ifBlank { "Tidak ada catatan" }}
 ━━━━━━━━━━━━━━━━━━━━
 Dikirim via ShiftSnap App
         """.trimIndent()
@@ -222,12 +210,12 @@ Dikirim via ShiftSnap App
             onSuccess  = { response ->
                 Snackbar.make(
                     binding.root,
-                    "✅ Terkirim ke server (ID: ${response.reportId})",
+                    "Terkirim ke server (ID: ${response.reportId})",
                     Snackbar.LENGTH_LONG
                 ).show()
             },
             onError = { message ->
-                Snackbar.make(binding.root, "❌ Gagal: $message", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(binding.root, "Gagal: $message", Snackbar.LENGTH_LONG).show()
             }
         )
     }

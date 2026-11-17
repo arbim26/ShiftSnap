@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-35:/values-ru/values-ru.xml",
+            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-36:/values-ru/values-ru.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nazwa\\.gradle\\caches\\9.3.0\\transforms\\d4b5dd28534fd9d4ee0a789fd7dcc77e\\workspace\\transformed\\jetified-play-services-basement-18.4.0\\res\\values-ru\\values.xml",

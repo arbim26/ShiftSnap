@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    activity_detail_report.xml
-    Layout untuk DetailReportActivity – Kartu detail satu laporan dari riwayat.
-    Binding class: ActivityDetailReportBinding
--->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_chevron_right"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:navigationIconTint="?attr/colorOnSurface"
             app:title="Detail Laporan"
             app:subtitleTextAppearance="@style/TextAppearance.Material3.BodyMedium" />
@@ -50,21 +45,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="?attr/colorPrimaryContainer"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="28dp"
                 app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:background="@drawable/bg_header_gradient"
+                    android:padding="24dp">
 
                     <TextView
                         android:id="@+id/tvDetailMesin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/on_header"
                         tools:text="Mesin CNC A-01" />
 
                     <TextView
@@ -73,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textColor="@color/on_header"
                         tools:text="Shift 1 – Pagi (06.00–14.00)" />
 
                     <TextView
@@ -82,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textColor="@color/on_header"
                         android:alpha="0.75"
                         tools:text="23 Okt 2026, 08:42 WIB" />
 
@@ -92,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                        android:textColor="?attr/colorOnPrimaryContainer"
+                        android:textColor="@color/on_header"
                         tools:text="Operator: OPR001" />
 
                 </LinearLayout>
@@ -105,8 +102,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
 
@@ -130,7 +127,7 @@
                         android:layout_marginTop="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                         app:chipMinHeight="36dp"
-                        tools:text="✅  Normal / Siap Jalan" />
+                        tools:text="Normal / Siap Jalan" />
 
                 </LinearLayout>
 
@@ -142,8 +139,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
 
@@ -166,7 +163,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        tools:text="✅ Pelumas / Oli" />
+                        tools:text="Pelumas / Oli" />
 
                     <TextView
                         android:id="@+id/tvDetailSuhu"
@@ -174,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        tools:text="✅ Suhu Mesin" />
+                        tools:text="Suhu Mesin" />
 
                     <TextView
                         android:id="@+id/tvDetailListrik"
@@ -182,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        tools:text="⬜ Modul Kelistrikan" />
+                        tools:text="Modul Kelistrikan" />
 
                     <TextView
                         android:id="@+id/tvDetailBersih"
@@ -190,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        tools:text="✅ Kebersihan Area" />
+                        tools:text="Kebersihan Area" />
 
                 </LinearLayout>
 
@@ -202,8 +199,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:strokeColor="?attr/colorOutlineVariant"
                 app:strokeWidth="1dp">
 
@@ -236,7 +233,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        tools:text="📷 Foto terlampir" />
+                        tools:text="Foto terlampir" />
 
                     <View
                         android:layout_width="match_parent"
@@ -271,11 +268,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="📤  Bagikan ke Supervisor"
+                android:text="Bagikan ke Supervisor"
                 android:textAllCaps="false"
                 app:cornerRadius="12dp"
-                app:icon="@drawable/ic_bar_chart"
-                style="@style/Widget.Material3.Button" />
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                style="@style/Widget.ShiftSnap.Button" />
 
             <!-- Edit Laporan -->
             <com.google.android.material.button.MaterialButton
@@ -283,10 +281,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="✏️  Edit Laporan"
+                android:text="Edit Laporan"
                 android:textAllCaps="false"
                 app:cornerRadius="12dp"
-                style="@style/Widget.Material3.Button.OutlinedButton" />
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                style="@style/Widget.ShiftSnap.Button.Outlined" />
 
         </LinearLayout>
 

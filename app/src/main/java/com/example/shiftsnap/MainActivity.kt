@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -19,10 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var session: SessionManager
+    private lateinit var attendanceRepo: AttendanceRepository
+
+    private val jamFormat = SimpleDateFormat("HH:mm", Locale("id", "ID"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         session = SessionManager(this)
+        attendanceRepo = AttendanceRepository(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,12 +35,15 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         setupUser()
         setupClickListeners()
-        updateAttendanceStatus()
     }
 
+    // Refresh status absensi setiap kali halaman utama tampil lagi
+    // (termasuk setelah kembali dari AttendanceActivity).
     override fun onResume() {
         super.onResume()
-        updateAttendanceStatus()
+        binding.tvTanggal.text = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id", "ID"))
+            .format(Date())
+        refreshAttendanceStatus()
     }
 
     // Inflate menu via onCreateOptionsMenu (cara yang benar)
@@ -86,38 +94,78 @@ class MainActivity : AppCompatActivity() {
         binding.tvOperatorName.text = if (operatorId.isNotEmpty()) operatorId else "Operator"
     }
 
-    private fun updateAttendanceStatus() {
-        val repo = AttendanceRepository(this)
-        val operatorId = session.getOperatorId()
-        val masuk = repo.todayMasuk(operatorId)
-        val pulang = repo.todayPulang(operatorId)
-        val timeFmt = SimpleDateFormat("HH:mm", Locale.getDefault())
-
-        val masukText = if (masuk != null) "sudah (${timeFmt.format(Date(masuk.timestamp))})" else "belum"
-        val pulangText = if (pulang != null) "sudah (${timeFmt.format(Date(pulang.timestamp))})" else "belum"
-
-        binding.tvStatusAbsen.text = "Masuk: $masukText  •  Pulang: $pulangText"
-    }
-
     private fun setupClickListeners() {
         binding.cardAttendance.setOnClickListener { navigateToAttendance() }
-        binding.btnMainAbsenMasuk.setOnClickListener { navigateToAttendance(AttendanceRecord.MASUK) }
-        binding.btnMainAbsenPulang.setOnClickListener { navigateToAttendance(AttendanceRecord.PULANG) }
         binding.cardNewReport.setOnClickListener { navigateToNewReport() }
         binding.cardRecap.setOnClickListener { navigateToRecap() }
-        binding.fabNewReport.setOnClickListener { navigateToNewReport() }
     }
 
-    private fun navigateToAttendance(jenis: String? = null) {
+    // ── Absensi ─────────────────────────────────────────────
+
+    /** Isi kartu "Absensi Hari Ini" dan ubah kartu aksi sesuai kondisi. */
+    private fun refreshAttendanceStatus() {
+        val id = session.getOperatorId()
+        val masuk = attendanceRepo.todayMasuk(id)
+        val pulang = attendanceRepo.todayPulang(id)
+
+        binding.tvAbsenMasukInfo.text =
+            masuk?.let { "Pukul ${jamFormat.format(Date(it.timestamp))}" } ?: "Belum absen masuk"
+        binding.tvAbsenPulangInfo.text =
+            pulang?.let { "Pukul ${jamFormat.format(Date(it.timestamp))}" } ?: "Belum absen pulang"
+
+
+        // Chip status
+        val (label, bg, fg) = when {
+            pulang != null -> Triple("Selesai", R.color.status_normal_bg, R.color.status_normal_text)
+            masuk != null -> Triple(
+                "Sedang bekerja",
+                R.color.md_theme_primaryContainer,
+                R.color.md_theme_onPrimaryContainer
+            )
+            else -> Triple("Belum absen", R.color.status_warning_bg, R.color.status_warning_text)
+        }
+        binding.chipAbsenState.text = label
+        binding.chipAbsenState.setChipBackgroundColorResource(bg)
+        binding.chipAbsenState.setTextColor(getColor(fg))
+
+        // Kartu aksi: Masuk → Pulang → Selesai (terkunci)
+        val selesai = pulang != null
+        binding.cardAttendance.alpha = if (selesai) 0.5f else 1f
+        binding.tvAttendanceTitle.text = when {
+            selesai -> "Absensi Selesai"
+            masuk != null -> "Absen Pulang"
+            else -> "Absen Masuk"
+        }
+        binding.tvAttendanceSubtitle.text = when {
+            selesai -> "Sampai jumpa besok"
+            masuk != null -> "Isi pekerjaan hari ini"
+            else -> "Dokumentasi Absen"
+        }
+    }
+
+    private fun navigateToAttendance() {
         val operatorId = session.getOperatorId()
+
+        // Sudah absen pulang → absensi hari ini selesai, tidak bisa absen lagi
+        if (attendanceRepo.todayPulang(operatorId) != null) {
+            Snackbar.make(
+                binding.root,
+                "Kamu sudah absen masuk dan pulang hari ini",
+                Snackbar.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        // Sudah masuk → buka tab Pulang, kalau belum → tab Masuk
+        val jenis = if (attendanceRepo.todayMasuk(operatorId) != null)
+            AttendanceRecord.PULANG else AttendanceRecord.MASUK
+
         val intent = Intent(this, AttendanceActivity::class.java).apply {
             putExtra(
                 AttendanceActivity.EXTRA_OPERATOR_NAME,
                 if (operatorId.isNotEmpty()) operatorId else "Operator"
             )
-            if (jenis != null) {
-                putExtra(AttendanceActivity.EXTRA_JENIS, jenis)
-            }
+            putExtra(AttendanceActivity.EXTRA_JENIS, jenis)
         }
         startActivity(intent)
     }

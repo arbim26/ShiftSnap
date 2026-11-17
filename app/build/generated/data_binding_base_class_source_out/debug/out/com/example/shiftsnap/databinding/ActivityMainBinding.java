@@ -13,10 +13,8 @@ import androidx.viewbinding.ViewBindings;
 import com.example.shiftsnap.R;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -29,10 +27,7 @@ public final class ActivityMainBinding implements ViewBinding {
   public final AppBarLayout appBarLayout;
 
   @NonNull
-  public final MaterialButton btnMainAbsenMasuk;
-
-  @NonNull
-  public final MaterialButton btnMainAbsenPulang;
+  public final MaterialCardView cardAbsenStatus;
 
   @NonNull
   public final MaterialCardView cardAttendance;
@@ -47,45 +42,52 @@ public final class ActivityMainBinding implements ViewBinding {
   public final MaterialCardView cardRecap;
 
   @NonNull
-  public final Chip chipShift;
-
-  @NonNull
-  public final FloatingActionButton fabNewReport;
+  public final Chip chipAbsenState;
 
   @NonNull
   public final MaterialToolbar toolbar;
 
   @NonNull
-  public final TextView tvLastReport;
+  public final TextView tvAbsenMasukInfo;
+
+  @NonNull
+  public final TextView tvAbsenPulangInfo;
+
+  @NonNull
+  public final TextView tvAttendanceSubtitle;
+
+  @NonNull
+  public final TextView tvAttendanceTitle;
 
   @NonNull
   public final TextView tvOperatorName;
 
   @NonNull
-  public final TextView tvStatusAbsen;
+  public final TextView tvTanggal;
 
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull AppBarLayout appBarLayout, @NonNull MaterialButton btnMainAbsenMasuk,
-      @NonNull MaterialButton btnMainAbsenPulang, @NonNull MaterialCardView cardAttendance,
-      @NonNull MaterialCardView cardGreeting, @NonNull MaterialCardView cardNewReport,
-      @NonNull MaterialCardView cardRecap, @NonNull Chip chipShift,
-      @NonNull FloatingActionButton fabNewReport, @NonNull MaterialToolbar toolbar,
-      @NonNull TextView tvLastReport, @NonNull TextView tvOperatorName,
-      @NonNull TextView tvStatusAbsen) {
+      @NonNull AppBarLayout appBarLayout, @NonNull MaterialCardView cardAbsenStatus,
+      @NonNull MaterialCardView cardAttendance, @NonNull MaterialCardView cardGreeting,
+      @NonNull MaterialCardView cardNewReport, @NonNull MaterialCardView cardRecap,
+      @NonNull Chip chipAbsenState, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView tvAbsenMasukInfo, @NonNull TextView tvAbsenPulangInfo,
+      @NonNull TextView tvAttendanceSubtitle, @NonNull TextView tvAttendanceTitle,
+      @NonNull TextView tvOperatorName, @NonNull TextView tvTanggal) {
     this.rootView = rootView;
     this.appBarLayout = appBarLayout;
-    this.btnMainAbsenMasuk = btnMainAbsenMasuk;
-    this.btnMainAbsenPulang = btnMainAbsenPulang;
+    this.cardAbsenStatus = cardAbsenStatus;
     this.cardAttendance = cardAttendance;
     this.cardGreeting = cardGreeting;
     this.cardNewReport = cardNewReport;
     this.cardRecap = cardRecap;
-    this.chipShift = chipShift;
-    this.fabNewReport = fabNewReport;
+    this.chipAbsenState = chipAbsenState;
     this.toolbar = toolbar;
-    this.tvLastReport = tvLastReport;
+    this.tvAbsenMasukInfo = tvAbsenMasukInfo;
+    this.tvAbsenPulangInfo = tvAbsenPulangInfo;
+    this.tvAttendanceSubtitle = tvAttendanceSubtitle;
+    this.tvAttendanceTitle = tvAttendanceTitle;
     this.tvOperatorName = tvOperatorName;
-    this.tvStatusAbsen = tvStatusAbsen;
+    this.tvTanggal = tvTanggal;
   }
 
   @Override
@@ -121,15 +123,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnMainAbsenMasuk;
-      MaterialButton btnMainAbsenMasuk = ViewBindings.findChildViewById(rootView, id);
-      if (btnMainAbsenMasuk == null) {
-        break missingId;
-      }
-
-      id = R.id.btnMainAbsenPulang;
-      MaterialButton btnMainAbsenPulang = ViewBindings.findChildViewById(rootView, id);
-      if (btnMainAbsenPulang == null) {
+      id = R.id.cardAbsenStatus;
+      MaterialCardView cardAbsenStatus = ViewBindings.findChildViewById(rootView, id);
+      if (cardAbsenStatus == null) {
         break missingId;
       }
 
@@ -157,15 +153,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.chipShift;
-      Chip chipShift = ViewBindings.findChildViewById(rootView, id);
-      if (chipShift == null) {
-        break missingId;
-      }
-
-      id = R.id.fabNewReport;
-      FloatingActionButton fabNewReport = ViewBindings.findChildViewById(rootView, id);
-      if (fabNewReport == null) {
+      id = R.id.chipAbsenState;
+      Chip chipAbsenState = ViewBindings.findChildViewById(rootView, id);
+      if (chipAbsenState == null) {
         break missingId;
       }
 
@@ -175,9 +165,27 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvLastReport;
-      TextView tvLastReport = ViewBindings.findChildViewById(rootView, id);
-      if (tvLastReport == null) {
+      id = R.id.tvAbsenMasukInfo;
+      TextView tvAbsenMasukInfo = ViewBindings.findChildViewById(rootView, id);
+      if (tvAbsenMasukInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.tvAbsenPulangInfo;
+      TextView tvAbsenPulangInfo = ViewBindings.findChildViewById(rootView, id);
+      if (tvAbsenPulangInfo == null) {
+        break missingId;
+      }
+
+      id = R.id.tvAttendanceSubtitle;
+      TextView tvAttendanceSubtitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvAttendanceSubtitle == null) {
+        break missingId;
+      }
+
+      id = R.id.tvAttendanceTitle;
+      TextView tvAttendanceTitle = ViewBindings.findChildViewById(rootView, id);
+      if (tvAttendanceTitle == null) {
         break missingId;
       }
 
@@ -187,15 +195,16 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvStatusAbsen;
-      TextView tvStatusAbsen = ViewBindings.findChildViewById(rootView, id);
-      if (tvStatusAbsen == null) {
+      id = R.id.tvTanggal;
+      TextView tvTanggal = ViewBindings.findChildViewById(rootView, id);
+      if (tvTanggal == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, appBarLayout, btnMainAbsenMasuk,
-          btnMainAbsenPulang, cardAttendance, cardGreeting, cardNewReport, cardRecap, chipShift,
-          fabNewReport, toolbar, tvLastReport, tvOperatorName, tvStatusAbsen);
+      return new ActivityMainBinding((CoordinatorLayout) rootView, appBarLayout, cardAbsenStatus,
+          cardAttendance, cardGreeting, cardNewReport, cardRecap, chipAbsenState, toolbar,
+          tvAbsenMasukInfo, tvAbsenPulangInfo, tvAttendanceSubtitle, tvAttendanceTitle,
+          tvOperatorName, tvTanggal);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,6 +4,7 @@ package com.example.shiftsnap.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -89,7 +90,13 @@ public final class ActivityAttendanceBinding implements ViewBinding {
   public final LinearLayout layoutWajahEmpty;
 
   @NonNull
+  public final AutoCompleteTextView spinnerShiftAbsen;
+
+  @NonNull
   public final TextInputLayout tilPekerjaan;
+
+  @NonNull
+  public final TextInputLayout tilShiftAbsen;
 
   @NonNull
   public final MaterialButtonToggleGroup toggleJenisAbsen;
@@ -126,7 +133,8 @@ public final class ActivityAttendanceBinding implements ViewBinding {
       @NonNull TextInputEditText etPekerjaan, @NonNull ShapeableImageView imgFotoKerja,
       @NonNull ShapeableImageView imgFotoLokasi, @NonNull ShapeableImageView imgFotoWajah,
       @NonNull LinearLayout layoutLokasiEmpty, @NonNull LinearLayout layoutWajahEmpty,
-      @NonNull TextInputLayout tilPekerjaan, @NonNull MaterialButtonToggleGroup toggleJenisAbsen,
+      @NonNull AutoCompleteTextView spinnerShiftAbsen, @NonNull TextInputLayout tilPekerjaan,
+      @NonNull TextInputLayout tilShiftAbsen, @NonNull MaterialButtonToggleGroup toggleJenisAbsen,
       @NonNull MaterialToolbar toolbar, @NonNull TextView tvAbsenNama,
       @NonNull TextView tvAbsenStatus, @NonNull TextView tvAbsenWaktu,
       @NonNull TextView tvKoordinat, @NonNull TextView tvLokasiError,
@@ -152,7 +160,9 @@ public final class ActivityAttendanceBinding implements ViewBinding {
     this.imgFotoWajah = imgFotoWajah;
     this.layoutLokasiEmpty = layoutLokasiEmpty;
     this.layoutWajahEmpty = layoutWajahEmpty;
+    this.spinnerShiftAbsen = spinnerShiftAbsen;
     this.tilPekerjaan = tilPekerjaan;
+    this.tilShiftAbsen = tilShiftAbsen;
     this.toggleJenisAbsen = toggleJenisAbsen;
     this.toolbar = toolbar;
     this.tvAbsenNama = tvAbsenNama;
@@ -310,9 +320,21 @@ public final class ActivityAttendanceBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.spinnerShiftAbsen;
+      AutoCompleteTextView spinnerShiftAbsen = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerShiftAbsen == null) {
+        break missingId;
+      }
+
       id = R.id.tilPekerjaan;
       TextInputLayout tilPekerjaan = ViewBindings.findChildViewById(rootView, id);
       if (tilPekerjaan == null) {
+        break missingId;
+      }
+
+      id = R.id.tilShiftAbsen;
+      TextInputLayout tilShiftAbsen = ViewBindings.findChildViewById(rootView, id);
+      if (tilShiftAbsen == null) {
         break missingId;
       }
 
@@ -368,9 +390,9 @@ public final class ActivityAttendanceBinding implements ViewBinding {
           btnAbsenPulang, btnAmbilFotoKerja, btnAmbilFotoLokasi, btnAmbilFotoWajah, btnKirimAbsen,
           cardFotoLokasi, cardFotoWajah, cardInfo, cardLokasiPreview, cardPekerjaan,
           cardWajahPreview, chipLokasiAttached, chipWajahAttached, etPekerjaan, imgFotoKerja,
-          imgFotoLokasi, imgFotoWajah, layoutLokasiEmpty, layoutWajahEmpty, tilPekerjaan,
-          toggleJenisAbsen, toolbar, tvAbsenNama, tvAbsenStatus, tvAbsenWaktu, tvKoordinat,
-          tvLokasiError, tvWajahError);
+          imgFotoLokasi, imgFotoWajah, layoutLokasiEmpty, layoutWajahEmpty, spinnerShiftAbsen,
+          tilPekerjaan, tilShiftAbsen, toggleJenisAbsen, toolbar, tvAbsenNama, tvAbsenStatus,
+          tvAbsenWaktu, tvKoordinat, tvLokasiError, tvWajahError);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

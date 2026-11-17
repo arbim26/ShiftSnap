@@ -1,26 +1,57 @@
 <resources>
-    <!-- MD3 Baseline – Blue-Steel industrial palette -->
-    <color name="md_theme_primary">#1A6B9A</color>
+    <!-- ShiftSnap · Blue-Steel industrial + Amber safety accent (Material 3) -->
+
+    <!-- Primary: biru baja -->
+    <color name="md_theme_primary">#0A6AA6</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
-    <color name="md_theme_primaryContainer">#C7E5FF</color>
-    <color name="md_theme_onPrimaryContainer">#001F33</color>
-    <color name="md_theme_secondary">#4E6373</color>
+    <color name="md_theme_primaryContainer">#CFE6FA</color>
+    <color name="md_theme_onPrimaryContainer">#001D32</color>
+
+    <!-- Secondary: abu baja -->
+    <color name="md_theme_secondary">#51606F</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
-    <color name="md_theme_secondaryContainer">#D1E8FA</color>
-    <color name="md_theme_onSecondaryContainer">#0B1E2B</color>
-    <color name="md_theme_surface">#F6FAFE</color>
-    <color name="md_theme_onSurface">#171C1F</color>
-    <color name="md_theme_surfaceVariant">#DCE4EC</color>
-    <color name="md_theme_onSurfaceVariant">#40484F</color>
+    <color name="md_theme_secondaryContainer">#D4E4F6</color>
+    <color name="md_theme_onSecondaryContainer">#0D1D2A</color>
+
+    <!-- Tertiary: amber (warna safety industri) -->
+    <color name="md_theme_tertiary">#8A5100</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#FFDCBD</color>
+    <color name="md_theme_onTertiaryContainer">#2C1600</color>
+
+    <!-- Surface & outline -->
+    <color name="md_theme_surface">#F6F9FC</color>
+    <color name="md_theme_onSurface">#181C20</color>
+    <color name="md_theme_surfaceVariant">#DDE3EA</color>
+    <color name="md_theme_onSurfaceVariant">#41484D</color>
+    <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_surfaceContainerLow">#F0F4F8</color>
+    <color name="md_theme_surfaceContainer">#EAEEF3</color>
+    <color name="md_theme_surfaceContainerHigh">#E4E9EE</color>
+    <color name="md_theme_outline">#71787E</color>
+    <color name="md_theme_outlineVariant">#C1C7CE</color>
+
+    <!-- Error -->
     <color name="md_theme_error">#BA1A1A</color>
-    <color name="md_theme_outline">#70787F</color>
-    <!--  Status Normal (hijau)  -->
-    <color name="status_normal_bg">#C8E6C9</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onErrorContainer">#410002</color>
+
+    <!-- Gradient header (login, greeting, detail) -->
+    <color name="header_start">#0B4F7C</color>
+    <color name="header_end">#1B8FD0</color>
+    <color name="on_header">#FFFFFF</color>
+    <color name="on_header_variant">#D6EAF8</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_35">#59FFFFFF</color>
+
+    <!-- Status Normal (hijau) -->
+    <color name="status_normal_bg">#D3EED5</color>
     <color name="status_normal_text">#1B5E20</color>
-    <!--  Status Maintenance / Peringatan (kuning-oranye)  -->
-    <color name="status_warning_bg">#FFF9C4</color>
-    <color name="status_warning_text">#F57F17</color>
-    <!--  Status Breakdown / Error (merah)  -->
-    <color name="status_error_bg">#FFCDD2</color>
+    <!-- Status Maintenance / Peringatan (kuning-oranye) -->
+    <color name="status_warning_bg">#FFF0C2</color>
+    <color name="status_warning_text">#8F5200</color>
+    <!-- Status Breakdown / Error (merah) -->
+    <color name="status_error_bg">#FFD9DC</color>
     <color name="status_error_text">#B71C1C</color>
 </resources>

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-35:/values-bs/values-bs.xml",
+            "outputFile": "com.example.shiftsnap.app-mergeDebugResources-36:/values-bs/values-bs.xml",
             "map": [
                 {
                     "source": "C:\\Users\\nazwa\\.gradle\\caches\\9.3.0\\transforms\\3394fae758fb521e3599b656eb5995e1\\workspace\\transformed\\material-1.12.0\\res\\values-bs\\values-bs.xml",

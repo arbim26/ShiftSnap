@@ -9,7 +9,10 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Looper
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +22,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.example.shiftsnap.model.AttendanceRecord
 import com.example.shiftsnap.model.AttendanceRepository
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -41,12 +47,15 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var tvWaktu: TextView
     private lateinit var tvStatus: TextView
     private lateinit var toggleJenis: MaterialButtonToggleGroup
+    private lateinit var btnMasuk: MaterialButton
+    private lateinit var tilShift: TextInputLayout
+    private lateinit var spinnerShift: AutoCompleteTextView
 
     private lateinit var layoutLokasiEmpty: View
     private lateinit var imgLokasi: ImageView
     private lateinit var chipLokasi: Chip
     private lateinit var tvLokasiError: TextView
-    private lateinit var tvKoordinat: TextView
+    private lateinit var tvKoordinat: TextView      // sekarang menampilkan ALAMAT (+ koordinat kecil)
     private lateinit var btnFotoLokasi: MaterialButton
 
     private lateinit var layoutWajahEmpty: View
@@ -70,11 +79,24 @@ class AttendanceActivity : AppCompatActivity() {
     private var pendingUri: Uri? = null          // uri yang sedang diisi kamera
     private var currentLocation: Location? = null
     private var pendingAction: (() -> Unit)? = null
+    private var updatesActive = false
+
+    // Deteksi alamat (reverse geocoding)
+    private var alamatText: String? = null       // alamat terakhir yang berhasil dideteksi
+    private var lastResolved: Location? = null   // titik terakhir yang sudah di-geocode
+    private var resolving = false
 
     private lateinit var repo: AttendanceRepository
     private lateinit var operatorId: String
 
     private val fusedClient by lazy { LocationServices.getFusedLocationProviderClient(this) }
+
+    // Update posisi berkelanjutan → koordinat & alamat ikut diperbarui
+    private val locationCallback = object : LocationCallback() {
+        override fun onLocationResult(result: LocationResult) {
+            result.lastLocation?.let { showLocation(it) }
+        }
+    }
     private val dateFormat = SimpleDateFormat("EEEE, dd MMM yyyy  HH:mm", Locale("id", "ID"))
 
     // ── Activity result launchers ───────────────────────────
@@ -93,6 +115,8 @@ class AttendanceActivity : AppCompatActivity() {
             if (success) {
                 lokasiUri = pendingUri
                 showLokasiPreview()
+                // Foto lokasi selesai → langsung deteksi alamat dari posisi terbaru
+                currentLocation?.let { resolveAlamat(it, force = true) } ?: fetchLocation()
             }
             pendingUri = null
         }
@@ -120,17 +144,38 @@ class AttendanceActivity : AppCompatActivity() {
     // ── Lifecycle ───────────────────────────────────────────
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_attendance)
 
         repo = AttendanceRepository(this)
         operatorId = SessionManager(this).getOperatorId()
 
+        // Sudah absen pulang → absensi hari ini selesai, tidak bisa absen lagi
+        if (repo.todayPulang(operatorId) != null) {
+            Toast.makeText(this, "Absensi hari ini sudah selesai", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
+
         bindViews()
         setupHeader()
         setupListeners()
 
-        // kalau izin lokasi sudah ada, langsung ambil koordinat
-        if (hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) fetchLocation()
+        // Izin lokasi dibutuhkan supaya alamat bisa terdeteksi
+        ensurePermissions(Manifest.permission.ACCESS_FINE_LOCATION) {
+            fetchLocation()
+            startLocationUpdates()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    override fun onPause() {
+        stopLocationUpdates()
+        super.onPause()
     }
 
     private fun bindViews() {
@@ -139,6 +184,9 @@ class AttendanceActivity : AppCompatActivity() {
         tvWaktu = findViewById(R.id.tvAbsenWaktu)
         tvStatus = findViewById(R.id.tvAbsenStatus)
         toggleJenis = findViewById(R.id.toggleJenisAbsen)
+        btnMasuk = findViewById(R.id.btnAbsenMasuk)
+        tilShift = findViewById(R.id.tilShiftAbsen)
+        spinnerShift = findViewById(R.id.spinnerShiftAbsen)
 
         layoutLokasiEmpty = findViewById(R.id.layoutLokasiEmpty)
         imgLokasi = findViewById(R.id.imgFotoLokasi)
@@ -167,43 +215,58 @@ class AttendanceActivity : AppCompatActivity() {
         // Nama operator dikirim dari MainActivity (opsional)
         tvNama.text = intent.getStringExtra(EXTRA_OPERATOR_NAME) ?: "Operator"
         tvWaktu.text = dateFormat.format(Date())
-        val pekerjaanTerkirim = repo.todayPulang(operatorId)?.laporanKerja
-        tvStatus.text = buildString {
-            append("Hari ini → ${repo.statusText(operatorId)}")
-            if (!pekerjaanTerkirim.isNullOrBlank()) append("\nPekerjaan: $pekerjaanTerkirim")
-        }
+        tvStatus.text = "Hari ini → ${repo.statusText(operatorId)}"
 
-        // Pilih tab Masuk / Pulang sesuai tombol yang diklik di halaman utama
-        val jenis = intent.getStringExtra(EXTRA_JENIS) ?: AttendanceRecord.MASUK
+        // Sudah absen masuk → tombol Masuk dikunci, langsung ke Pulang
+        val sudahMasuk = repo.todayMasuk(operatorId) != null
+        btnMasuk.isEnabled = !sudahMasuk
+
+        val jenis = intent.getStringExtra(EXTRA_JENIS)
+            ?: if (sudahMasuk) AttendanceRecord.PULANG else AttendanceRecord.MASUK
         toggleJenis.check(
             if (jenis == AttendanceRecord.PULANG) R.id.btnAbsenPulang else R.id.btnAbsenMasuk
         )
     }
 
+    private fun setupShiftDropdown() {
+        spinnerShift.setAdapter(
+            ArrayAdapter(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                AttendanceRecord.SHIFT_OPTIONS
+            )
+        )
+        spinnerShift.setOnClickListener { spinnerShift.showDropDown() }
+        spinnerShift.setOnItemClickListener { _, _, _, _ -> tilShift.error = null }
+    }
+
     private fun setupListeners() {
+        setupShiftDropdown()
+
         btnFotoLokasi.setOnClickListener {
-            requestPermissions(
+            ensurePermissions(
                 Manifest.permission.CAMERA,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) {
                 fetchLocation()
+                startLocationUpdates()
                 launchCamera(prefix = "ABSEN_LOKASI") { uri -> takeLokasiLauncher.launch(uri) }
             }
         }
 
         btnFotoWajah.setOnClickListener {
-            requestPermissions(Manifest.permission.CAMERA) {
+            ensurePermissions(Manifest.permission.CAMERA) {
                 launchCamera(prefix = "ABSEN_WAJAH") { uri -> takeWajahLauncher.launch(uri) }
             }
         }
 
         btnFotoKerja.setOnClickListener {
-            requestPermissions(Manifest.permission.CAMERA) {
+            ensurePermissions(Manifest.permission.CAMERA) {
                 launchCamera(prefix = "ABSEN_KERJA") { uri -> takeKerjaLauncher.launch(uri) }
             }
         }
 
-        // Form "Pekerjaan Hari Ini" hanya tampil saat memilih Pulang
+        // Kartu "Pekerjaan Hari Ini" hanya tampil saat memilih Pulang
         toggleJenis.addOnButtonCheckedListener { _, _, isChecked ->
             if (isChecked) updateJenisUi()
         }
@@ -215,6 +278,16 @@ class AttendanceActivity : AppCompatActivity() {
     private fun updateJenisUi() {
         val pulang = toggleJenis.checkedButtonId == R.id.btnAbsenPulang
         cardPekerjaan.visibility = if (pulang) View.VISIBLE else View.GONE
+
+        // Shift dipilih saat MASUK. Saat PULANG, tampilkan shift yang sudah dipilih (terkunci).
+        if (pulang) {
+            val shiftHariIni = repo.todayShift(operatorId)
+            spinnerShift.setText(shiftHariIni ?: "", false)
+            tilShift.isEnabled = false
+            tilShift.error = null
+        } else {
+            tilShift.isEnabled = true
+        }
         btnKirim.text = if (pulang) "Kirim Absen Pulang" else "Kirim Absen Masuk"
     }
 
@@ -250,27 +323,79 @@ class AttendanceActivity : AppCompatActivity() {
         btnFotoWajah.text = "Ambil Ulang Foto Wajah"
     }
 
-    // ── Lokasi GPS ──────────────────────────────────────────
+    // ── Lokasi GPS + deteksi alamat ─────────────────────────
     @SuppressLint("MissingPermission")
     private fun fetchLocation() {
         if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) return
-        tvKoordinat.text = "Mencari koordinat…"
+        if (alamatText == null) tvKoordinat.text = "Mencari lokasi…"
         fusedClient
-            .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, gitCancellationTokenSource().token)
+            .getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, CancellationTokenSource().token)
             .addOnSuccessListener { loc ->
                 if (loc != null) {
-                    currentLocation = loc
-                    tvKoordinat.text = String.format(
-                        Locale.US, "%.6f, %.6f  (±%d m)",
-                        loc.latitude, loc.longitude, loc.accuracy.toInt()
-                    )
-                } else {
-                    tvKoordinat.text = "Koordinat tidak tersedia. Aktifkan GPS."
+                    showLocation(loc, forceResolve = lokasiUri != null)
+                } else if (alamatText == null) {
+                    tvKoordinat.text = "Lokasi tidak tersedia. Aktifkan GPS."
                 }
             }
             .addOnFailureListener {
-                tvKoordinat.text = "Gagal mendapatkan koordinat"
+                if (alamatText == null) tvKoordinat.text = "Gagal mendapatkan lokasi"
             }
+    }
+
+    /** Simpan posisi terbaru lalu deteksi alamatnya (di-throttle supaya Geocoder tidak dibanjiri). */
+    private fun showLocation(loc: Location, forceResolve: Boolean = false) {
+        currentLocation = loc
+        if (alamatText == null) {
+            // Alamat belum ada → tampilkan koordinat sementara
+            tvKoordinat.text = koordinatText(loc)
+        }
+        resolveAlamat(loc, force = forceResolve)
+    }
+
+    /**
+     * Reverse geocoding: koordinat → "Jalan Penganten No. 5, Kelurahan, Kecamatan, Kota".
+     * Hanya dijalankan lagi bila posisi bergeser > 50 m dari titik terakhir (atau [force]).
+     */
+    private fun resolveAlamat(loc: Location, force: Boolean = false) {
+        val last = lastResolved
+        if (!force && last != null && last.distanceTo(loc) < 50f) {
+            // Posisi hampir sama: cukup perbarui akurasi di baris koordinat
+            alamatText?.let { tvKoordinat.text = "$it\n${koordinatText(loc)}" }
+            return
+        }
+        if (resolving) return
+        resolving = true
+        if (alamatText == null) tvKoordinat.text = "Mendeteksi alamat…"
+
+        LocationResolver.resolve(this, loc.latitude, loc.longitude) { info ->
+            resolving = false
+            if (isFinishing || isDestroyed) return@resolve
+            lastResolved = loc
+            alamatText = info.alamatTampil
+            tvKoordinat.text = "${info.alamatTampil}\n${koordinatText(loc)}"
+        }
+    }
+
+    private fun koordinatText(loc: Location) = String.format(
+        Locale.US, "%.6f, %.6f  (±%d m)",
+        loc.latitude, loc.longitude, loc.accuracy.toInt()
+    )
+
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() {
+        if (updatesActive) return
+        if (!hasPermission(Manifest.permission.ACCESS_FINE_LOCATION)) return
+        val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 3000L)
+            .setMinUpdateIntervalMillis(2000L)
+            .build()
+        fusedClient.requestLocationUpdates(request, locationCallback, Looper.getMainLooper())
+        updatesActive = true
+    }
+
+    private fun stopLocationUpdates() {
+        if (!updatesActive) return
+        fusedClient.removeLocationUpdates(locationCallback)
+        updatesActive = false
     }
 
     // ── Validasi & kirim ────────────────────────────────────
@@ -285,8 +410,15 @@ class AttendanceActivity : AppCompatActivity() {
             tvWajahError.visibility = View.VISIBLE
             valid = false
         }
+        // Absen masuk wajib memilih shift
+        val shiftDipilih = spinnerShift.text?.toString()?.trim().orEmpty()
+        val isMasuk = toggleJenis.checkedButtonId == R.id.btnAbsenMasuk
+        if (isMasuk && shiftDipilih.isEmpty()) {
+            tilShift.error = "Pilih shift terlebih dahulu"
+            valid = false
+        }
         if (currentLocation == null) {
-            Toast.makeText(this, "Koordinat GPS belum didapat. Tunggu sebentar atau aktifkan GPS.", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Lokasi GPS belum didapat. Tunggu sebentar atau aktifkan GPS.", Toast.LENGTH_LONG).show()
             fetchLocation()
             valid = false
         }
@@ -332,7 +464,8 @@ class AttendanceActivity : AppCompatActivity() {
             fotoLokasiUri = lokasiUri.toString(),
             fotoWajahUri = wajahUri.toString(),
             laporanKerja = pekerjaan,
-            fotoKerjaUri = kerjaUri?.toString()
+            fotoKerjaUri = kerjaUri?.toString(),
+            shift = if (jenis == AttendanceRecord.MASUK) shiftDipilih else null
         )
         repo.add(record)
 
@@ -354,7 +487,7 @@ class AttendanceActivity : AppCompatActivity() {
     private fun hasPermission(permission: String) =
         ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 
-    private fun requestPermissions(vararg permissions: String, onGranted: () -> Unit) {
+    private fun ensurePermissions(vararg permissions: String, onGranted: () -> Unit) {
         val missing = permissions.filterNot { hasPermission(it) }
         if (missing.isEmpty()) {
             onGranted()
